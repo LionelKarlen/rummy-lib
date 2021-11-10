@@ -6,6 +6,10 @@
   "dependencies": {
     "typescript": "^4.4.4"
   },
+  "scripts": {
+	  "prepare": "tsc",
+	  "lint": "prettier --write \"src/{*.ts,**/*.ts}\""
+  },
   "devDependencies": {
     "prettier": "^2.4.1"
   }
