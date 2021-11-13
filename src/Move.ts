@@ -1,5 +1,6 @@
 import { Stack, Hand, Discard } from "./Stack";
 import { Card } from "./Card";
+import { StackType } from "./StackType";
 export abstract class Move {
 	from: Stack;
 	to: Stack;
@@ -23,11 +24,17 @@ export abstract class Move {
 export class PickupMove extends Move {
 	constructor(from: Stack, to: Hand, card: Card) {
 		super(from, to, card);
+		if (from.type == StackType.DISCARD) {
+			this.to.cards[0].isDiscard = true;
+		}
 	}
 }
 
 export class PutdownMove extends Move {
 	constructor(from: Hand, to: Discard, card: Card) {
 		super(from, to, card);
+		for (let i = 0; i < this.from.cards.length; i++) {
+			this.from.cards[i].isDiscard = false;
+		}
 	}
 }

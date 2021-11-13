@@ -6,10 +6,12 @@ export class Card {
 	rank: Rank;
 	suit: Suit;
 	score: Score;
+	isDiscard: boolean;
 
 	constructor(rank: Rank, suit: Suit) {
 		this.rank = rank;
 		this.suit = suit;
 		this.score = Util.getScore(rank);
+		this.isDiscard = false;
 	}
 }
