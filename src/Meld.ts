@@ -14,11 +14,9 @@ export abstract class Meld {
 	}
 
 	abstract isValidAddition(card: Card): boolean;
-	addToMeld(card: Card, bypass?: boolean) {
-		if (this.isValidAddition(card) || bypass) {
-			this.cards.push(card);
-			this.cards = Util.sortCards(this.cards);
-		}
+	addToMeld(card: Card) {
+		this.cards.push(card);
+		this.cards = Util.sortCards(this.cards);
 	}
 }
 

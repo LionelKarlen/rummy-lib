@@ -64,7 +64,7 @@ export class Util {
 				: new Book([cards[0]]);
 		for (let i = 1; i < cards.length; i++) {
 			if (!meld.isValidAddition(cards[i])) return false;
-			meld.addToMeld(cards[i], true);
+			meld.addToMeld(cards[i]);
 		}
 		return true;
 	}

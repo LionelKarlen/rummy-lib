@@ -1,5 +1,6 @@
 import { StackType } from "./StackType";
 import { Card } from "./Card";
+import { Meld } from "./Meld";
 
 export abstract class Stack {
 	type: StackType;
@@ -26,5 +27,13 @@ export class Discard extends Stack {
 export class Hand extends Stack {
 	constructor() {
 		super(StackType.HAND);
+	}
+}
+
+export class MeldStack extends Stack {
+	melds: Meld[];
+	constructor() {
+		super(StackType.MELD);
+		this.melds = [];
 	}
 }

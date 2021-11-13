@@ -2,13 +2,13 @@ import { Rummy } from "./Rummy";
 import { Card } from "./Card";
 import { Score } from "./Score";
 import { Suit } from "./Suit";
-import { Meld, Run } from "./Meld";
+import { Meld, Run, Book } from "./Meld";
 import { Util } from "./Util";
 import { MeldType } from "./MeldType";
 import { Rank } from "./Rank";
 import { Hand, Stack, Stock } from "./Stack";
 import { StackType } from "./StackType";
-import { PickupMove, Move, PutdownMove } from "./Move";
+import { PickupMove, Move, PutdownMove, MeldMove } from "./Move";
 
 function test() {
 	let rummy = new Rummy();
@@ -42,6 +42,21 @@ function debug() {
 		rummy.board.stock.cards[0]
 	);
 	pickup.makeMove();
+
+	let cards: Card[] = [
+		new Card(Rank.QUEEN, Suit.CLUBS),
+		new Card(Rank.KING, Suit.CLUBS),
+		new Card(Rank.JACK, Suit.CLUBS),
+	];
+
+	let meld = new Book(cards);
+
+	let meldmove = new MeldMove(
+		rummy.players[0].hand,
+		rummy.players[0].meldStack,
+		meld
+	);
+	meldmove.makeMove();
 
 	let putdown = new PutdownMove(
 		rummy.players[0].hand,
