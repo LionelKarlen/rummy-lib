@@ -1,6 +1,6 @@
 import { Player } from "./Player";
 import { Board } from "./Board";
-import { Util } from './Util';
+import { Util } from "./Util";
 
 export class Rummy {
 	players: Player[];
@@ -10,7 +10,8 @@ export class Rummy {
 		this.players = [new Player(), new Player()];
 		this.board = new Board();
 		console.log(this.board.stock.cards);
-		let cards=Util.generateDeck();
-		console.log(cards);	
+		let cards = Util.generateDeck();
+		console.log(cards);
+		this.board.stock.cards = cards;
 	}
 }
