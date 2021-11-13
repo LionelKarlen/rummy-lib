@@ -56,6 +56,14 @@ export class Util {
 		return score;
 	}
 
+	static calculateScore(hand: Hand) {
+		let score = 0;
+		for (let card of hand.cards) {
+			score += card.score;
+		}
+		return score;
+	}
+
 	static isValidMeld(meldType: MeldType, cards: Card[]) {
 		cards = this.sortCards(cards);
 		if (cards.length < 3) return false;
