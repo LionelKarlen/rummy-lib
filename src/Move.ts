@@ -9,16 +9,27 @@ export abstract class Move {
 	to: Stack;
 	card: Card;
 
-	makeMove() {
+	makeMove(): boolean {
+		if (!this.isCardInStack(this.from, this.card)) {
+			return false;
+		}
 		this.to.cards.push(
 			this.from.cards.splice(this.from.cards.indexOf(this.card), 1)[0]
 		);
 		this.postMoveLog();
+		return true;
 	}
 
 	postMoveLog() {
 		console.log("from:", this.from.cards.length);
 		console.log("to:", this.to.cards.length);
+	}
+	isCardInStack(stack: Stack, card: Card) {
+		if (stack.cards.indexOf(card) == -1) {
+			console.log("failed");
+			return false;
+		}
+		return true;
 	}
 	constructor(from: Stack, to: Stack, card: Card) {
 		this.from = from;
@@ -56,7 +67,36 @@ export class MeldMove extends Move {
 	makeMove() {
 		(this.to as MeldStack).melds.push(this.meld);
 		for (let card of this.meld.cards) {
+			if (!this.isCardInStack(this.from, card)) {
+				return false;
+			}
+		}
+		for (let card of this.meld.cards) {
 			this.from.cards.splice(this.from.cards.indexOf(card), 1);
 		}
+		this.postMoveLog();
+		return true;
+	}
+}
+
+export class LayMove extends Move {
+	meld: Meld;
+	constructor(from: Hand, to: MeldStack, card: Card, meld: Meld) {
+		super(from, to, card);
+		this.meld = meld;
+	}
+
+	makeMove() {
+		if (!this.isCardInStack(this.from, this.card)) {
+			return false;
+		}
+		let index = this.from.cards.indexOf(this.card);
+		console.log("index", index);
+
+		(this.to as MeldStack).melds[
+			(this.to as MeldStack).melds.indexOf(this.meld)
+		].addToMeld(this.from.cards.splice(index, 1)[0]);
+		this.postMoveLog();
+		return true;
 	}
 }

@@ -8,7 +8,7 @@ import { MeldType } from "./MeldType";
 import { Rank } from "./Rank";
 import { Hand, Stack, Stock } from "./Stack";
 import { StackType } from "./StackType";
-import { PickupMove, Move, PutdownMove, MeldMove } from "./Move";
+import { PickupMove, Move, PutdownMove, MeldMove, LayMove } from "./Move";
 
 function test() {
 	let rummy = new Rummy();
@@ -49,6 +49,11 @@ function debug() {
 		new Card(Rank.JACK, Suit.CLUBS),
 	];
 
+	for (let i = 0; i < cards.length; i++) {
+		rummy.players[0].hand.cards.push(cards[i]);
+	}
+	console.log(rummy.players[0].hand.cards.length);
+
 	let meld = new Book(cards);
 
 	let meldmove = new MeldMove(
@@ -56,7 +61,17 @@ function debug() {
 		rummy.players[0].meldStack,
 		meld
 	);
-	meldmove.makeMove();
+	console.log("meldmove", meldmove.makeMove());
+	let card = new Card(Rank.ACE, Suit.CLUBS);
+	rummy.players[0].hand.cards.push(card);
+
+	let laymove = new LayMove(
+		rummy.players[0].hand,
+		rummy.players[0].meldStack,
+		card,
+		rummy.players[0].meldStack.melds[0]
+	);
+	console.log("laymove", laymove.makeMove());
 
 	let putdown = new PutdownMove(
 		rummy.players[0].hand,
