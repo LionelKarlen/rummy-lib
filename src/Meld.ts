@@ -31,7 +31,7 @@ export class Book extends Meld {
 	}
 
 	isValidAddition(card: Card): boolean {
-		return card.rank == this.rank;
+		return card.rank === this.rank;
 	}
 }
 

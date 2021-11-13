@@ -3,6 +3,7 @@ import { Suit } from "./Suit";
 import { Card } from "./Card";
 import { Run, Book } from "./Meld";
 import { MeldType } from "./MeldType";
+import { Score } from "./Score";
 
 export class Util {
 	static generateDeck(): Card[] {
@@ -28,6 +29,24 @@ export class Util {
 		return cards.sort((a, b) => a.rank - b.rank);
 	}
 
+	static getScore(rank: Rank) {
+		// console.log("Rank:",rank,Rank[rank]);
+		let score: Score;
+		if (rank < 10) {
+			score = Object.values(Score)[rank + 10] as unknown as Score;
+		} else if (rank == 10) {
+			score = Score.TEN;
+		} else if (rank == 11) {
+			score = Score.JACK;
+		} else if (rank == 12) {
+			score = Score.QUEEN;
+		} else {
+			score = Score.KING;
+		}
+		// console.log(score);
+		return score;
+	}
+
 	static isValidMeld(meldType: MeldType, cards: Card[]) {
 		cards = this.sortCards(cards);
 		if (cards.length < 3) return false;
@@ -37,6 +56,7 @@ export class Util {
 				: new Book([cards[0]]);
 		for (let i = 1; i < cards.length; i++) {
 			if (!meld.isValidAddition(cards[i])) return false;
+			meld.addToMeld(cards[i], true);
 		}
 		return true;
 	}
