@@ -8,9 +8,9 @@ import { MeldType } from "./MeldType";
 import { Rank } from "./Rank";
 import { Hand, Stack, Stock } from "./Stack";
 import { StackType } from "./StackType";
-import { PickupMove, Move } from "./Move";
+import { PickupMove, Move, PutdownMove } from "./Move";
 
-function debug() {
+function test() {
 	let rummy = new Rummy();
 
 	let cards: Card[] = [
@@ -31,6 +31,24 @@ function debug() {
 	move.makeMove();
 	console.log("hand after", hand.cards);
 	console.log("stack after", stack.cards);
+}
+
+function debug() {
+	let rummy = new Rummy();
+
+	let pickup = new PickupMove(
+		rummy.board.stock,
+		rummy.players[0].hand,
+		rummy.board.stock.cards[0]
+	);
+	pickup.makeMove();
+
+	let putdown = new PutdownMove(
+		rummy.players[0].hand,
+		rummy.board.discard,
+		rummy.players[0].hand.cards[0]
+	);
+	putdown.makeMove();
 }
 
 debug();
