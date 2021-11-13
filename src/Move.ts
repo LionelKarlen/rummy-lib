@@ -4,6 +4,7 @@ import { StackType } from "./StackType";
 import { Meld } from "./Meld";
 import { Rank } from "./Rank";
 import { Suit } from "./Suit";
+import { Util } from "./Util";
 export abstract class Move {
 	from: Stack;
 	to: Stack;
@@ -53,6 +54,7 @@ export class PutdownMove extends Move {
 		for (let i = 0; i < this.from.cards.length; i++) {
 			this.from.cards[i].isDiscard = false;
 		}
+		Util.checkGameOver(from);
 	}
 }
 

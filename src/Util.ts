@@ -4,6 +4,7 @@ import { Card } from "./Card";
 import { Run, Book } from "./Meld";
 import { MeldType } from "./MeldType";
 import { Score } from "./Score";
+import { Hand } from "./Stack";
 
 export class Util {
 	static generateDeck(): Card[] {
@@ -67,5 +68,9 @@ export class Util {
 			meld.addToMeld(cards[i]);
 		}
 		return true;
+	}
+
+	static checkGameOver(hand: Hand) {
+		return hand.cards.length != 0;
 	}
 }
