@@ -1,7 +1,7 @@
 import { StackType } from "./StackType";
 import { Card } from "./Card";
 
-abstract class Stack {
+export abstract class Stack {
 	type: StackType;
 	cards: Card[];
 
@@ -20,5 +20,11 @@ export class Stock extends Stack {
 export class Discard extends Stack {
 	constructor() {
 		super(StackType.DISCARD);
+	}
+}
+
+export class Hand extends Stack {
+	constructor() {
+		super(StackType.HAND);
 	}
 }
