@@ -25,6 +25,14 @@ export class Util {
 		return cards;
 	}
 
+	static shuffleCards(cards: Card[]) {
+		for (let i = cards.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			[cards[i], cards[j]] = [cards[j], cards[i]];
+		}
+		return cards;
+	}
+
 	static sortCards(cards: Card[]): Card[] {
 		return cards.sort((a, b) => a.rank - b.rank);
 	}

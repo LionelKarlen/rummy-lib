@@ -13,8 +13,6 @@ import { PickupMove, Move } from "./Move";
 function debug() {
 	let rummy = new Rummy();
 
-	console.log(rummy.board.stock.cards[0].suit);
-
 	let cards: Card[] = [
 		new Card(Rank.QUEEN, Suit.CLUBS),
 		new Card(Rank.KING, Suit.CLUBS),
