@@ -6,6 +6,7 @@ import { Move } from "./Move";
 export class Rummy {
 	players: Player[];
 	board: Board;
+	isGameOver: boolean;
 
 	constructor() {
 		this.players = [new Player(), new Player()];
@@ -17,6 +18,7 @@ export class Rummy {
 		}
 		this.board.stock.cards = cards.splice(0, cards.length - 1);
 		this.board.discard.cards = [cards[0]];
+		this.isGameOver=false;
 	}
 
 	makeMove(player: Player, move: Move) {
@@ -30,5 +32,6 @@ export class Rummy {
 		for (let player of this.players) {
 			Util.calculateScore(player.hand);
 		}
+		this.isGameOver=true;
 	}
 }
