@@ -1,15 +1,17 @@
 {
-  "name": "rummy",
+  "name": "rummy-lib",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "lib/index.js",
   "license": "MIT",
+  "types": "lib",
   "dependencies": {
     "typescript": "^4.4.4"
   },
   "scripts": {
     "prepare": "tsc",
     "lint": "prettier --write \"src/{*.ts,**/*.ts}\"",
-	"debug": "ts-node src/debug.ts"
+	"debug": "ts-node src/debug.ts",
+	"build": "tsc -p ."
   },
   "devDependencies": {
     "prettier": "^2.4.1",
