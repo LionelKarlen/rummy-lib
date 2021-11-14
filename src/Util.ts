@@ -79,6 +79,6 @@ export class Util {
 	}
 
 	static checkGameOver(hand: Hand) {
-		return hand.cards.length != 0;
+		return hand.cards.length == 0;
 	}
 }
