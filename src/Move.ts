@@ -17,7 +17,7 @@ export abstract class Move {
 		this.to.cards.push(
 			this.from.cards.splice(this.from.cards.indexOf(this.card), 1)[0]
 		);
-		this.postMoveLog();
+		// this.postMoveLog();
 		return true;
 	}
 
@@ -76,7 +76,7 @@ export class MeldMove extends Move {
 		for (let card of this.meld.cards) {
 			this.from.cards.splice(this.from.cards.indexOf(card), 1);
 		}
-		this.postMoveLog();
+		// this.postMoveLog();
 		return true;
 	}
 }
@@ -98,7 +98,7 @@ export class LayMove extends Move {
 		(this.to as MeldStack).melds[
 			(this.to as MeldStack).melds.indexOf(this.meld)
 		].addToMeld(this.from.cards.splice(index, 1)[0]);
-		this.postMoveLog();
+		// this.postMoveLog();
 		return true;
 	}
 }
