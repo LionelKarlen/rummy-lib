@@ -18,7 +18,7 @@ export class Rummy {
 		}
 		this.board.stock.cards = cards.splice(0, cards.length - 1);
 		this.board.discard.cards = [cards[0]];
-		this.isGameOver=false;
+		this.isGameOver = false;
 	}
 
 	makeMove(player: Player, move: Move) {
@@ -29,9 +29,9 @@ export class Rummy {
 	}
 
 	handleGameOver() {
-		for (let player of this.players) {
-			Util.calculateScore(player.hand);
+		for (let i = 0; i < this.players.length; i++) {
+			this.players[i].score = Util.calculateScore(this.players[i].hand);
 		}
-		this.isGameOver=true;
+		this.isGameOver = true;
 	}
 }
