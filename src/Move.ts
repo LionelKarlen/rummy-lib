@@ -11,9 +11,9 @@ export abstract class Move {
 	card: Card;
 
 	makeMove(): boolean {
-		if (!this.isCardInStack(this.from, this.card)) {
-			return false;
-		}
+		// if (!this.isCardInStack(this.from, this.card)) {
+		// 	return false;
+		// }
 		this.to.cards.push(
 			this.from.cards.splice(this.from.cards.indexOf(this.card), 1)[0]
 		);
