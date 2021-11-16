@@ -11,9 +11,9 @@ export abstract class Move {
 	card: Card;
 
 	makeMove(): boolean {
-		// if (!this.isCardInStack(this.from, this.card)) {
-		// 	return false;
-		// }
+		if (!this.isCardInStack(this.from, this.card)) {
+			return false;
+		}
 		this.to.cards.push(
 			this.from.cards.splice(this.from.cards.indexOf(this.card), 1)[0]
 		);
@@ -26,7 +26,11 @@ export abstract class Move {
 		console.log("to:", this.to.cards.length);
 	}
 	isCardInStack(stack: Stack, card: Card) {
-		if (stack.cards.indexOf(card) == -1) {
+		if (
+			stack.cards.findIndex(
+				(c, i) => c.rank == card.rank && c.suit == card.suit
+			) == -1
+		) {
 			console.log("failed");
 			return false;
 		}
