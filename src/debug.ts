@@ -27,7 +27,7 @@ function test() {
 	stack.cards.push(cards[0]);
 	stack.cards.push(cards[1]);
 	console.log("stack", stack.cards);
-	let move: PickupMove = new PickupMove(stack, hand, stack.cards[0]);
+	let move: PickupMove = new PickupMove(stack, hand, 0);
 	move.makeMove();
 	console.log("hand after", hand.cards);
 	console.log("stack after", stack.cards);
@@ -36,11 +36,7 @@ function test() {
 function debug() {
 	let rummy = new Rummy();
 
-	let pickup = new PickupMove(
-		rummy.board.stock,
-		rummy.players[0].hand,
-		rummy.board.stock.cards[0]
-	);
+	let pickup = new PickupMove(rummy.board.stock, rummy.players[0].hand, 0);
 	pickup.makeMove();
 
 	let cards: Card[] = [
@@ -68,7 +64,7 @@ function debug() {
 	let laymove = new LayMove(
 		rummy.players[0].hand,
 		rummy.players[0].meldStack,
-		card,
+		rummy.players[0].hand.cards.length - 1,
 		rummy.players[0].meldStack.melds[0]
 	);
 	console.log("laymove", laymove.makeMove());
@@ -76,7 +72,7 @@ function debug() {
 	let putdown = new PutdownMove(
 		rummy.players[0].hand,
 		rummy.board.discard,
-		rummy.players[0].hand.cards[0]
+		0
 	);
 	putdown.makeMove();
 }
