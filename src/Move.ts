@@ -8,15 +8,13 @@ import { Util } from "./Util";
 export abstract class Move {
 	from: Stack;
 	to: Stack;
-	card: Card;
+	card: number;
 
 	makeMove(): boolean {
-		if (!this.isCardInStack(this.from, this.card)) {
-			return false;
-		}
-		this.to.cards.push(
-			this.from.cards.splice(this.from.cards.indexOf(this.card), 1)[0]
-		);
+		// if (!this.isCardInStack(this.from, this.card)) {
+		// 	return false;
+		// }
+		this.to.cards.push(this.from.cards.splice(this.card, 1)[0]);
 		// this.postMoveLog();
 		return true;
 	}
@@ -25,18 +23,18 @@ export abstract class Move {
 		console.log("from:", this.from.cards.length);
 		console.log("to:", this.to.cards.length);
 	}
-	isCardInStack(stack: Stack, card: Card) {
-		if (
-			stack.cards.findIndex(
-				(c, i) => c.rank == card.rank && c.suit == card.suit
-			) == -1
-		) {
-			console.log("failed");
-			return false;
-		}
-		return true;
-	}
-	constructor(from: Stack, to: Stack, card: Card) {
+	// isCardInStack(stack: Stack, card: Card) {
+	// 	if (
+	// 		stack.cards.findIndex(
+	// 			(c, i) => c.rank == card.rank && c.suit == card.suit
+	// 		) == -1
+	// 	) {
+	// 		console.log("failed");
+	// 		return false;
+	// 	}
+	// 	return true;
+	// }
+	constructor(from: Stack, to: Stack, card: number) {
 		this.from = from;
 		this.to = to;
 		this.card = card;
@@ -44,7 +42,7 @@ export abstract class Move {
 }
 
 export class PickupMove extends Move {
-	constructor(from: Stack, to: Hand, card: Card) {
+	constructor(from: Stack, to: Hand, card: number) {
 		super(from, to, card);
 		if (from.type == StackType.DISCARD) {
 			this.to.cards[0].isDiscard = true;
@@ -53,7 +51,7 @@ export class PickupMove extends Move {
 }
 
 export class PutdownMove extends Move {
-	constructor(from: Hand, to: Discard, card: Card) {
+	constructor(from: Hand, to: Discard, card: number) {
 		super(from, to, card);
 		for (let i = 0; i < this.from.cards.length; i++) {
 			this.from.cards[i].isDiscard = false;
@@ -66,17 +64,17 @@ export class MeldMove extends Move {
 	meld: Meld;
 	constructor(from: Hand, to: MeldStack, meld: Meld) {
 		let card: Card = new Card(Rank.ACE, Suit.CLUBS);
-		super(from, to, card);
+		super(from, to, 0);
 		this.meld = meld;
 	}
 
 	makeMove() {
 		(this.to as MeldStack).melds.push(this.meld);
-		for (let card of this.meld.cards) {
-			if (!this.isCardInStack(this.from, card)) {
-				return false;
-			}
-		}
+		// for (let card of this.meld.cards) {
+		// if (!this.isCardInStack(this.from, card)) {
+		// 	return false;
+		// }
+		// }
 		for (let card of this.meld.cards) {
 			this.from.cards.splice(this.from.cards.indexOf(card), 1);
 		}
@@ -87,16 +85,16 @@ export class MeldMove extends Move {
 
 export class LayMove extends Move {
 	meld: Meld;
-	constructor(from: Hand, to: MeldStack, card: Card, meld: Meld) {
+	constructor(from: Hand, to: MeldStack, card: number, meld: Meld) {
 		super(from, to, card);
 		this.meld = meld;
 	}
 
 	makeMove() {
-		if (!this.isCardInStack(this.from, this.card)) {
-			return false;
-		}
-		let index = this.from.cards.indexOf(this.card);
+		// if (!this.isCardInStack(this.from, this.card)) {
+		// 	return false;
+		// }
+		let index = this.card;
 		console.log("index", index);
 
 		(this.to as MeldStack).melds[
