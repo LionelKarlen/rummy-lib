@@ -95,7 +95,7 @@ export class LayMove extends Move {
 		// 	return false;
 		// }
 		let index = this.card;
-		console.log("index", index);
+		// console.log("index", index);
 
 		(this.to as MeldStack).melds[
 			(this.to as MeldStack).melds.indexOf(this.meld)
